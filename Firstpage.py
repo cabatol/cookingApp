@@ -1,13 +1,17 @@
+import sys
 from tkinter import *
 
-btn1 = Button(text="Add Recipe")
-btn2 = Button(text="Search Recipes")
-btn3 = Button(text="Learn to Cook")
-btn4 = Button(text="More...")
+def addRecipe():
+    mlabel1= Label(mGui, text='you cant do this yet').pack()
 
-btn1.place(relx=0.5, rely=0.2, anchor=CENTER)
-btn2.place(relx=0.5, rely=0.4, anchor=CENTER)
-btn3.place(relx=0.5, rely=0.6, anchor=CENTER)
-btn4.place(relx=0.5, rely=0.8, anchor=CENTER)
-                    
-mainloop()
+mGui = Tk()
+
+mGui.geometry('325x500')
+mGui.title('My Cooking App')
+
+mlabel = Label(mGui, text='My Cooking App').place(relx=0.5, rely=.1, anchor=CENTER)
+btn1 = Button(mGui, text='Add Recipe', command = addRecipe).place(relx=0.5, rely=0.2, anchor=CENTER)
+btn2 = Button(mGui, text='Search Recipe', command = addRecipe).place(relx=0.5, rely=0.3, anchor=CENTER)
+btn3 = Button(mGui, text='Learn to Cook', command = addRecipe).place(relx=0.5, rely=0.4, anchor=CENTER)
+btn4 = Button(mGui, text='More...', command = addRecipe).place(relx=0.5, rely=0.5, anchor=CENTER)
+
