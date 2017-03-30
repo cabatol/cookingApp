@@ -3,10 +3,16 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 
-class myLayout(BoxLayout):
-    def __init__ (self, **kwargs):
-        super(myLayout, self).__init__(**kwargs)
+red = [1,0,0,1]
+green = [0,1,0,1]
+blue =  [0,0,1,1]
+purple = [1,0,1,1]
 
+class HomePage(App):
+        
+    def build(self):
+        layout = BoxLayout(padding=100, orientation='vertical')
+        
         btn1 = Button(text = "Search for a Recipe")
         btn1.bind(on_press=self.clk1)
         btn2 = Button(text = "Add a Recipe")
@@ -16,11 +22,14 @@ class myLayout(BoxLayout):
         btn4 = Button(text = "More...")
         btn4.bind(on_press=self.clk4)
 
-        self.add_widget(Label(text="Welcome to My Cooking App"))
-        self.add_widget(btn1)
-        self.add_widget(btn2)
-        self.add_widget(btn3)
-        self.add_widget(btn4)
+
+        layout.add_widget(Label(text="Welcome to My Cooking App"))
+        layout.add_widget(btn1)
+        layout.add_widget(btn2)
+        layout.add_widget(btn3)
+        layout.add_widget(btn4)
+
+        return layout
 
     def clk1(self, obj):
         print("Hi There")
@@ -31,10 +40,6 @@ class myLayout(BoxLayout):
     def clk4(self, obj):
         print("Hi There!!!")
 
-class NameApp(App):
-    def build(self):
-        mL = myLayout()
-        return mL
-
 if __name__ == "__main__":
-    NameApp().run()
+    app = HomePage()
+    app.run()
