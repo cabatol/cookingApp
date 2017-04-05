@@ -11,25 +11,29 @@ class LearnToCook(App):
         
         layout = FloatLayout()
 
-        words = TextInput(text="What do you want to learn?",
+        self.words = TextInput(text="What do you want to learn?",
                           multiline = False, size_hint= (.5, .05),
                           pos_hint = {'x':.17 , 'y':.85})
-        #words.bind()
         
         btn = Button(text = "Search", size_hint = (.15, .05), pos_hint = {'x':.68 , 'y':.8491})
         btn.bind(on_press=self.clk)
+        btn1 = Button(text = "Back", size_hint = (.05, .05), pos_hint = {'x':.008, 'y':.94})
+        btn1.bind(on_press=self.goBack)
 
         layout.add_widget(Label(text="Learn To Cook", size_hint = (1, 1.9), font_size = 25))
-        layout.add_widget(words)
+        layout.add_widget(self.words)
         layout.add_widget(btn)
+        layout.add_widget(btn1)
 
         return layout
 
-    def on_enter(instance, value):
-        print('User pressed enter in', instance)
+    
+
+    def goBack(self, obj):
+        print("go back")
 
     def clk(self, obj):
-        print("does this work?")
+        print(self.words.text)
 
         
 
