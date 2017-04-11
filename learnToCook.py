@@ -11,7 +11,7 @@ class LearnToCook(App):
         
         layout = FloatLayout()
 
-        self.words = TextInput(text="What do you want to learn?",
+        self.words = TextInput(hint_text="What do you want to learn?",
                           multiline = False, size_hint= (.5, .05),
                           pos_hint = {'x':.17 , 'y':.85})
         
