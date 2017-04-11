@@ -58,7 +58,7 @@ class secondpage(FloatLayout):
         self.btn1.size_hint = (.1,.08)
         self.btn1.font_size = 20
         self.add_widget(self.btn1)
-        self.btn1.bind(on_press = clk1)
+        self.btn1.bind(on_press = self.clk1)
         
         
     def label(self):
@@ -76,7 +76,7 @@ class secondpage(FloatLayout):
                           pos_hint = {'x' :.17, 'y' :.25},
                           size_hint = (.53,0.4))
         self.add_widget(self.search)
-        self.search.bind(on_press = self.clk2)
+        
 
     def searchbutton(self):
         self.btn2 = Button()
@@ -86,6 +86,7 @@ class secondpage(FloatLayout):
         self.btn2.size_hint = (.1,.08)
         self.btn2.font_size = 20
         self.add_widget(self.btn2)
+        self.btn2.bind(on_press = self.clk2)
 
     def scroll (self):
         self.scrollview 
