@@ -31,16 +31,17 @@ class HomePage(App):
 
     def clk1(self, obj):
         app.stop()
-        SecondpageApp().run()
+        search.run()
     def clk2(self, obj):
-        if __name__ == "__main__":
-            HomePage().stop()
-            addRecipe().run()
+        app.stop()
+        add.run()
     def clk3(self, obj):
         app.stop()
-        LearnToCook().run()
+        learn.run()
     def clk4(self, obj):
-        print("Hi There!!!")
+        app.stop()
+        more.run()
+        
 
 class secondpage(FloatLayout):
     def build(self):
@@ -150,8 +151,8 @@ class addRecipe(App):
                       size=(200,150))
         popup.open()
     def clk1(self,obj):
-        addRecipe().stop()
-        HomePage().run()
+        add.stop()
+        app.run()
 
 
 class LearnToCook(App):
@@ -179,7 +180,8 @@ class LearnToCook(App):
     
 
     def goBack(self, obj):
-        print("go back")
+        learn.stop()
+        app.run()
 
     def clk(self, obj):
         print(self.words.text)
@@ -187,10 +189,26 @@ class LearnToCook(App):
 class interestingContent(App):
     def build(self):
         f = FloatLayout()
+
+        btn1 = Button(text = "Back", size_hint = (.05, .05), pos_hint = {'x':.008, 'y':.94})
+        btn1.bind(on_press=self.goBack)
+        
         f.add_widget(Label(text = "More",
                            font_size = 45,
                            size_hint=(1,1.9)))
+        f.add_widget(btn1)
+        
         return f
 
+    def goBack(self, obj):
+        more.stop()
+        app.run()
+
 if __name__ == "__main__":
-    HomePage().run()
+    
+    app = HomePage()
+    search = SecondpageApp()
+    add = addRecipe()
+    learn = LearnToCook()
+    more = interestingContent()
+    app.run()
