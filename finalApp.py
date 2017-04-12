@@ -1,9 +1,11 @@
 from kivy.app import App
+from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.textinput import TextInput
+
 
 
 class HomePage(App):
@@ -118,23 +120,23 @@ class addRecipe(App):
                          size_hint =(.1,.1),
                          pos_hint = {'x':.55, 'y':.05})
         
-        name = TextInput(hint_text= "Name of Recipe",size_hint =(.7,.05),pos_hint = {'x':.15, 'y':.8})
+        self.name1 = TextInput(hint_text= "Name of Recipe",size_hint =(.7,.05),pos_hint = {'x':.15, 'y':.8})
         
-        servings = TextInput(hint_text= "Servings",
+        self.servings = TextInput(hint_text= "Servings",
                              font_size = 10,
                              multiline = False,
                              size_hint = (.1,.05),
                              pos_hint = {'x':.3, 'y':.7})
-        time = TextInput(hint_text = "Time required",
+        self.time1 = TextInput(hint_text = "Time required",
                          font_size = 10,
                          multiline = False,
                          size_hint = (.1,.05),
                          pos_hint = {'x':.15, 'y':.7})
-        ingredients = TextInput(hint_text = "Ingredients",
+        self.ingredients = TextInput(hint_text = "Ingredients",
                                 font_size = 10,
                                 size_hint = (.7,.05),
                                 pos_hint = {'x':.15, 'y':.6})
-        directions = TextInput(hint_text = "Directions",
+        self.directions = TextInput(hint_text = "Directions",
                                font_size = 10,
                                size_hint = (.7,.35),
                                pos_hint = {'x':.15, 'y':.2})
@@ -144,21 +146,28 @@ class addRecipe(App):
         f.add_widget(Label(text = "Add a Recipe", font_size = 45,size_hint=(1,1.9)))
         f.add_widget(saveB)
         f.add_widget(cancelB)
-        f.add_widget(name)
-        f.add_widget(servings)
-        f.add_widget(time)
-        f.add_widget(ingredients)
-        f.add_widget(directions)
+        f.add_widget(self.name1)
+        f.add_widget(self.servings)
+        f.add_widget(self.time1)
+        f.add_widget(self.ingredients)
+        f.add_widget(self.directions)
 
         return f
     
 
     def clk(self,obj):
+        print(self.name1.text)
+        print(self.servings.text)
+        print(self.time1.text)
+        print(self.ingredients.text)
+        print(self.directions.text)
+        
         popup = Popup(title = "Confirmation",
                       content=Label(text = "Saved!"),
                       size_hint = (None,None),
                       size=(200,150))
         popup.open()
+        
     def clk1(self,obj):
         add.stop()
         app.run()
