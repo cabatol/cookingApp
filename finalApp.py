@@ -98,7 +98,23 @@ class secondpage(FloatLayout):
         app.run()
         
     def clk2(self,obj):
-        print(self.search.text)
+        my_key = '8b6f178c57d40dee7d88629b32e01c23'
+        my_id = 'fabbe897'
+        userAnswer = self.search.text
+        raw_answer=userAnswer
+        recipe,recipe1, recipe2 = raw_answer.split(' ')
+        my_search= {
+            'q' : recipe,
+            'requirePictures': 'True',
+            'allowedIngredient[]': [recipe,recipe1,recipe2]
+            
+        }
+
+        r = requests.get('http://api.yummly.com/v1/api/recipes?_app_id=fabbe897&_app_key=8b6f178c57d40dee7d88629b32e01c23&',params = my_search)
+
+
+        info = r.json()
+        print(info)
         
 class SecondpageApp(App):
     def build (self) :

@@ -17,6 +17,7 @@ class secondpage(FloatLayout):
         self.label()
         self.searchbutton()
         
+        
     def backbutton(self):
         self.btn1 = Button()
         self.btn1.text = "Back"
@@ -64,11 +65,11 @@ class secondpage(FloatLayout):
         my_id = 'fabbe897'
         userAnswer = self.search.text
         raw_answer=userAnswer
-        recipe = raw_answer.split(' ')
+        recipe,recipe1,recipe2 = raw_answer.split(' ')
         my_search= {
             'q' : recipe,
             'requirePictures': 'True',
-            'allowedIngredient[]': recipe
+            'allowedIngredient[]': [recipe,recipe1,recipe2]
             
         }
 
