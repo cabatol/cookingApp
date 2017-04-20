@@ -4,10 +4,41 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.floatlayout import FloatLayout
+from apiclient.discovery import build
+from oauth2client.tools import argparser
+import random
+
+API_Key = "AIzaSyAUZFGhlri17-rWRYUfl0grRWfgNmBqrxM"
+YOUTUBE_API_SERVICE_NAME = "youtube"
+YOUTUBE_API_VERSION = "v3"
+
+VideoIds = [ ]
+
+def yt_search(term):
+    youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION, developerKey = API_Key)
+    
+    search_response = youtube.search().list(
+        q =term,
+        part="id,snippet",
+        maxResults=50
+        ).execute()
+        
+    videos = []
+ 
+    for search_results in search_response.get("items", [ ]):
+        if search_results["id"]["kind"] == "youtube#video":
+            videos.append("%s (%s)" % (search_results["snippet"]["title"],search_results["id"]["videoId"]))
+            Id = search_results["id"]["videoId"]
+            VideoIds.append(Id)
+
+    Random_Id = (random.choice(VideoIds))
+    return Random_Id
 
 class LearnToCook(App):
 
     def build(self):
+
+        
         
         layout = FloatLayout()
 
@@ -27,15 +58,18 @@ class LearnToCook(App):
 
         return layout
 
-    
-
     def goBack(self, obj):
         print("go back")
 
     def clk(self, obj):
-        print(self.words.text)
-
-        
+        search = self.words.text
+        search = search.rstrip()
+        search = search.lstrip()        
+        search = search.replace(" ", "+")
+        url1 = yt_search(search)
+        url2 = "https://www.youtube.com/watch?v="
+        finalUrl = url2 + url1
+        print(finalUrl)
 
 if __name__ == "__main__":
     app = LearnToCook()
