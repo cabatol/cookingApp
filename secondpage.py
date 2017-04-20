@@ -1,4 +1,6 @@
 #Secondpageapp
+import requests
+import json
 from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
@@ -58,7 +60,23 @@ class secondpage(FloatLayout):
     def clk1(self, obj):
         print("go back")
     def clk2(self, obj):
-        print(self.search.text)
+        my_key = '8b6f178c57d40dee7d88629b32e01c23'
+        my_id = 'fabbe897'
+        userAnswer = self.search.text
+        raw_answer=userAnswer
+        recipe = raw_answer.split(' ')
+        my_search= {
+            'q' : recipe,
+            'requirePictures': 'True',
+            'allowedIngredient[]': recipe
+            
+        }
+
+        r = requests.get('http://api.yummly.com/v1/api/recipes?_app_id=fabbe897&_app_key=8b6f178c57d40dee7d88629b32e01c23&',params = my_search)
+
+
+        info = r.json()
+        print(info)
    
 
                 
