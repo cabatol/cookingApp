@@ -7,6 +7,8 @@ from kivy.uix.floatlayout import FloatLayout
 from apiclient.discovery import build
 from oauth2client.tools import argparser
 import random
+import webbrowser
+from kivy.uix.video import Video
 
 API_Key = "AIzaSyAUZFGhlri17-rWRYUfl0grRWfgNmBqrxM"
 YOUTUBE_API_SERVICE_NAME = "youtube"
@@ -20,7 +22,7 @@ def yt_search(term):
     search_response = youtube.search().list(
         q =term,
         part="id,snippet",
-        maxResults=50
+        maxResults=1
         ).execute()
         
     videos = []
@@ -42,7 +44,7 @@ class LearnToCook(App):
         
         layout = FloatLayout()
 
-        self.words = TextInput(hint_text="What do you want to learn?",
+        self.words = TextInput(text = "How to: ",
                           multiline = False, size_hint= (.5, .05),
                           pos_hint = {'x':.17 , 'y':.85})
         
@@ -68,10 +70,9 @@ class LearnToCook(App):
         search = search.replace(" ", "+")
         url1 = yt_search(search)
         url2 = "https://www.youtube.com/watch?v="
-        finalUrl = url2 + url1
-        print(finalUrl)
-
+        url = url2 + url1
+        webbrowser.open(url)
+        
 if __name__ == "__main__":
     app = LearnToCook()
     app.run()
-    
