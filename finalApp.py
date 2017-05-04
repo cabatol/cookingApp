@@ -1,4 +1,8 @@
+import json
+import requests
+from kivy.uix.image import *
 from kivy.app import App
+from kivy.uix.image import AsyncImage
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.button import Button
@@ -73,10 +77,10 @@ class secondpage(FloatLayout):
         
           
     def searchbox(self) :
-        self.search = TextInput(hint_text = "Tell us what you have: ",
-                          font_size = 20,
-                          pos_hint = {'x' :.17, 'y' :.25},
-                          size_hint = (.53,0.4))
+        self.search = TextInput(hint_text = "Tell us what you have ",
+                          font_size = 15,
+                          size_hint =(.7,.05),
+                          pos_hint = {'x':.15, 'y':.8})
         self.add_widget(self.search)
         
 
@@ -84,9 +88,9 @@ class secondpage(FloatLayout):
         self.btn2 = Button()
         self.btn2.text = "Search"
         #self.btn1.pos = (35,500)
-        self.btn2.pos_hint = {'x' :.72, 'y' :.57}
-        self.btn2.size_hint = (.1,.08)
-        self.btn2.font_size = 20
+        self.btn2.pos_hint = {'x' :.87, 'y' :.8}
+        self.btn2.size_hint = (.08,.05)
+        self.btn2.font_size = 15
         self.add_widget(self.btn2)
         self.btn2.bind(on_press = self.clk2)
 
@@ -101,20 +105,116 @@ class secondpage(FloatLayout):
         my_key = '8b6f178c57d40dee7d88629b32e01c23'
         my_id = 'fabbe897'
         userAnswer = self.search.text
-        raw_answer=userAnswer
-        recipe,recipe1, recipe2 = raw_answer.split(' ')
-        my_search= {
-            'q' : recipe,
-            'requirePictures': 'True',
-            'allowedIngredient[]': [recipe,recipe1,recipe2]
-            
-        }
+        userAnswer = userAnswer.rstrip()
+        userAnswer = userAnswer.lstrip()
+        counter = 1
+        for i in range (0,len(userAnswer)):
+            if (userAnswer[i] == " " and (userAnswer[i+1]).isalpha()):
+                counter += 1
+
+        if (counter == 1):
+            recipe= userAnswer.split(' ')
+            my_search= {
+                'requirePictures': 'True',
+                'allowedIngredient[]': [recipe]
+                
+            }
+        elif(counter == 2):
+            recipe, recipe1 = userAnswer.split(' ')
+            my_search= {
+                'requirePictures': 'True',
+                'allowedIngredient[]': [recipe, recipe1]   
+            }
+        elif(counter == 3):
+            recipe, recipe1, recipe2 = userAnswer.split(' ')
+            my_search= {
+                'requirePictures': 'True',
+                'allowedIngredient[]': [recipe, recipe1, recipe2]   
+            }
+        elif(counter == 4):
+            recipe, recipe1,recipe2,recipe3 = userAnswer.split(' ')
+            my_search= {
+                'requirePictures': 'True',
+                'allowedIngredient[]': [recipe, recipe1,recipe2, recipe3]   
+            }
+        elif(counter == 5):
+            recipe, recipe1, recipe2, recipe3, recipe4 = userAnswer.split(' ')
+            my_search= {
+                'requirePictures': 'True',
+                'allowedIngredient[]': [recipe, recipe1, recipe2,recipe3, recipe4]   
+            }
 
         r = requests.get('http://api.yummly.com/v1/api/recipes?_app_id=fabbe897&_app_key=8b6f178c57d40dee7d88629b32e01c23&',params = my_search)
 
 
-        info = r.json()
-        print(info)
+        data = r.json()
+
+        for i in range(0,10):
+            if(i == 0):
+                thing = str(data["matches"][i]["smallImageUrls"])
+                thing = thing[2:-2]
+                img = AsyncImage(source=thing, pos_hint ={'center_x':.34, 'center_y':.7}, size_hint = (5,5))
+                self.butt= Button(text = data["matches"][i]["recipeName"],
+                                  font_size = 10.5,
+                                  size_hint =(.29,.1),
+                                  pos_hint = {'x':.19, 'y':.53})
+                self.add_widget(self.butt)
+                self.add_widget(img)
+            elif(i == 1):
+                thing1 = str(data["matches"][i]["smallImageUrls"])
+                thing1 = thing1[2:-2]
+                img1 = AsyncImage(source=thing1, pos_hint ={'center_x':.63, 'center_y':.7}, size_hint = (5,5))
+                self.butt= Button(text = data["matches"][i]["recipeName"],
+                                  font_size = 10.5,
+                                  size_hint =(.29,.1),
+                                  pos_hint = {'x':.5, 'y':.53})
+                self.add_widget(self.butt)
+                self.add_widget(img1)
+            elif(i == 2):
+                thing2 = str(data["matches"][i]["smallImageUrls"])
+                thing2 = thing2[2:-2]
+                img2 = AsyncImage(source=thing2, pos_hint ={'center_x':.34, 'center_y':.43}, size_hint = (5,5))
+                self.butt= Button(text = data["matches"][i]["recipeName"],
+                                  font_size = 10.5,
+                                  size_hint =(.29,.1),
+                                  pos_hint = {'x':.19, 'y':.27})
+                self.add_widget(self.butt)
+                self.add_widget(img2)
+            elif(i == 3):
+                thing3 = str(data["matches"][i]["smallImageUrls"])
+                thing3 = thing3[2:-2]
+                img3 = AsyncImage(source=thing3, pos_hint ={'center_x':.63, 'center_y':.43}, size_hint = (5,5))
+                self.butt= Button(text = data["matches"][i]["recipeName"],
+                                  font_size = 10.5,
+                                  size_hint =(.29,.1),
+                                  pos_hint = {'x':.5, 'y':.27})
+                self.add_widget(self.butt)
+                self.add_widget(img3)
+            elif(i == 4):
+                thing4 = str(data["matches"][i]["smallImageUrls"])
+                thing4 = thing4[2:-2]
+                img4 = AsyncImage(source=thing4, pos_hint ={'center_x':.34, 'center_y':.19}, size_hint = (5,5))
+                self.butt= Button(text = data["matches"][i]["recipeName"],
+                                  font_size = 10.5,
+                                  size_hint =(.29,.1),
+                                  pos_hint = {'x':.19, 'y':.01})
+                self.add_widget(self.butt)
+                self.add_widget(img4)
+            elif(i == 5):
+                thing5 = str(data["matches"][i]["smallImageUrls"])
+                thing5 = thing5[2:-2]
+                img5 = AsyncImage(source=thing5, pos_hint ={'center_x':.63, 'center_y':.19}, size_hint = (5,5))
+                self.butt= Button(text = data["matches"][i]["recipeName"],
+                                  font_size = 10.5,
+                                  size_hint =(.29,.1),
+                                  pos_hint = {'x':.5, 'y':.01})
+                self.add_widget(self.butt)
+                self.add_widget(img5)
+            
+        print("Done")
+            #print(data["matches"][i]["recipeName"])
+            #print(data["matches"][i]["smallImageUrls"])
+            #print("  ")
         
 class SecondpageApp(App):
     def build (self) :
