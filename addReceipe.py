@@ -62,14 +62,22 @@ class addRecipe(App):
 
     def clk(self,obj):
 
-        print(self.name1.text)
-        print(self.servings.text)
-        print(self.time1.text)
+        name = self.name1.text + "\n"
+        servings = "Servings: " + self.servings.text + " "
+        time= self.time1.text
         print(self.ingredients.text)
         print(self.directions.text)
+
+        f =open("output.txt", "w+")
+        f.write()
+        f.write()
+        f.write()
+        f.write()
+        f.write()
+        f.close()
         
-        popup = Popup(title = "Confirmation",
-                      content=Label(text = "Saved!"),
+        popup = Popup(title = self.name1.text,
+                      content=Label(text = "Saved"),
                       size_hint = (None,None),
                       size=(200,150))
         popup.open()
@@ -78,4 +86,3 @@ class addRecipe(App):
 
 if __name__ == "__main__":
     addRecipe().run()
-
