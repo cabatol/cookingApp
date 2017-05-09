@@ -79,7 +79,8 @@ class addRecipe(App):
         popup = Popup(title = self.name1.text,
                       content=Label(text = "Saved"),
                       size_hint = (None,None),
-                      size=(200,150))
+                      size=(200,150),
+                      auto_dismiss = True)
         popup.open()
 
 
