@@ -5,6 +5,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.popup import Popup
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.screenmanager import ScreenManager,Screen
 
 
@@ -61,29 +62,32 @@ class addRecipe(App):
     
 
     def clk(self,obj):
-
+        
+        fname = self.name1.text + ".txt"
         name = self.name1.text + "\n"
         servings = "Servings: " + self.servings.text + " "
-        time= self.time1.text
-        print(self.ingredients.text)
-        print(self.directions.text)
+        time = "Time: " + self.time1.text + "\n"
+        ingredients = "\nIngredients:\n" + self.ingredients.text + "\n"
+        directions = "\nDirections:\n" + self.directions.text
 
-        f =open("output.txt", "w+")
-        f.write()
-        f.write()
-        f.write()
-        f.write()
-        f.write()
+        f =open(fname, "w+")
+        f.write(name)
+        f.write(servings)
+        f.write(time)
+        f.write(ingredients)
+        f.write(directions)
         f.close()
+
         
-        popup = Popup(title = self.name1.text,
-                      content=Label(text = "Saved"),
-                      size_hint = (None,None),
-                      size=(200,150),
-                      auto_dismiss = True)
+        content = Button(text = self.name1.text + "\nhas been saved successfully.",
+                         halign = "center", valign = "middle")
+        popup =  Popup (title = "Congratulations!",
+                        content = content,
+                        size_hint = (None, None),
+                        size = (300, 300),
+                        auto_dismiss = True)
+        content.bind(on_press=popup.dismiss)
         popup.open()
-
-
 
 if __name__ == "__main__":
     addRecipe().run()
