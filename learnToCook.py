@@ -76,3 +76,4 @@ class LearnToCook(App):
 if __name__ == "__main__":
     app = LearnToCook()
     app.run()
+    
