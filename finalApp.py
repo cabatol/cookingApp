@@ -55,14 +55,10 @@ class secondpage(FloatLayout):
         self.searchbox()
         self.label()
         self.searchbutton()
+        #self.justC()
         
     def backbutton(self):
-        self.btn1 = Button()
-        self.btn1.text = "Back"
-        #self.btn1.pos = (35,500)
-        self.btn1.pos_hint = {'x' :.025, 'y' :.88}
-        self.btn1.size_hint = (.1,.08)
-        self.btn1.font_size = 20
+        self.btn1 = Button(text = "Back", size_hint = (.05, .05), pos_hint = {'x':.008, 'y':.94})
         self.add_widget(self.btn1)
         self.btn1.bind(on_press = self.clk1)
         
@@ -85,12 +81,7 @@ class secondpage(FloatLayout):
         
 
     def searchbutton(self):
-        self.btn2 = Button()
-        self.btn2.text = "Search"
-        #self.btn1.pos = (35,500)
-        self.btn2.pos_hint = {'x' :.87, 'y' :.8}
-        self.btn2.size_hint = (.08,.05)
-        self.btn2.font_size = 15
+        self.btn2 = Button(text = "Search",size_hint = (.08,.05),pos_hint = {'x' :.87, 'y' :.8})
         self.add_widget(self.btn2)
         self.btn2.bind(on_press = self.clk2)
 
@@ -152,6 +143,7 @@ class secondpage(FloatLayout):
         for i in range(0,10):
             if(i == 0):
                 thing = str(data["matches"][i]["smallImageUrls"])
+                ids5 = str(data["matches"][i]["id"])
                 thing = thing[2:-2]
                 img = AsyncImage(source=thing, pos_hint ={'center_x':.34, 'center_y':.7}, size_hint = (5,5))
                 self.butt= Button(text = data["matches"][i]["recipeName"],
@@ -160,67 +152,84 @@ class secondpage(FloatLayout):
                                   pos_hint = {'x':.19, 'y':.53})
                 self.add_widget(self.butt)
                 self.add_widget(img)
+                #self.butt.bind(on_press = justC(ids5))
             elif(i == 1):
                 thing1 = str(data["matches"][i]["smallImageUrls"])
+                ids4 = str(data["matches"][i]["id"])
                 thing1 = thing1[2:-2]
                 img1 = AsyncImage(source=thing1, pos_hint ={'center_x':.63, 'center_y':.7}, size_hint = (5,5))
-                self.butt= Button(text = data["matches"][i]["recipeName"],
+                self.butt1= Button(text = data["matches"][i]["recipeName"],
                                   font_size = 10.5,
                                   size_hint =(.29,.1),
                                   pos_hint = {'x':.5, 'y':.53})
-                self.add_widget(self.butt)
+                self.add_widget(self.butt1)
                 self.add_widget(img1)
+                #self.butt1.bind(on_press = justC(ids4))
             elif(i == 2):
                 thing2 = str(data["matches"][i]["smallImageUrls"])
+                ids3 = str(data["matches"][i]["id"])
                 thing2 = thing2[2:-2]
                 img2 = AsyncImage(source=thing2, pos_hint ={'center_x':.34, 'center_y':.43}, size_hint = (5,5))
-                self.butt= Button(text = data["matches"][i]["recipeName"],
+                self.butt2= Button(text = data["matches"][i]["recipeName"],
                                   font_size = 10.5,
                                   size_hint =(.29,.1),
                                   pos_hint = {'x':.19, 'y':.27})
-                self.add_widget(self.butt)
+                self.add_widget(self.butt2)
                 self.add_widget(img2)
+                #self.butt2.bind(on_press = justC(ids3))
             elif(i == 3):
                 thing3 = str(data["matches"][i]["smallImageUrls"])
+                ids2 = str(data["matches"][i]["id"])
                 thing3 = thing3[2:-2]
                 img3 = AsyncImage(source=thing3, pos_hint ={'center_x':.63, 'center_y':.43}, size_hint = (5,5))
-                self.butt= Button(text = data["matches"][i]["recipeName"],
+                self.butt3= Button(text = data["matches"][i]["recipeName"],
                                   font_size = 10.5,
                                   size_hint =(.29,.1),
                                   pos_hint = {'x':.5, 'y':.27})
-                self.add_widget(self.butt)
+                self.add_widget(self.butt3)
                 self.add_widget(img3)
+                #self.butt3.bind(on_press = justC(ids2))
             elif(i == 4):
                 thing4 = str(data["matches"][i]["smallImageUrls"])
+                ids1 = str(data["matches"][i]["id"])
                 thing4 = thing4[2:-2]
                 img4 = AsyncImage(source=thing4, pos_hint ={'center_x':.34, 'center_y':.19}, size_hint = (5,5))
-                self.butt= Button(text = data["matches"][i]["recipeName"],
-                                  font_size = 10.5,
+                self.butt4= Button(text = data["matches"][i]["recipeName"],
+                                  font_size = 10,
                                   size_hint =(.29,.1),
                                   pos_hint = {'x':.19, 'y':.01})
-                self.add_widget(self.butt)
+                self.add_widget(self.butt4)
                 self.add_widget(img4)
+                #self.butt4.bind(on_press = justC(ids1))
             elif(i == 5):
                 thing5 = str(data["matches"][i]["smallImageUrls"])
+                ids = str(data["matches"][i]["id"])
                 thing5 = thing5[2:-2]
                 img5 = AsyncImage(source=thing5, pos_hint ={'center_x':.63, 'center_y':.19}, size_hint = (5,5))
-                self.butt= Button(text = data["matches"][i]["recipeName"],
-                                  font_size = 10.5,
+                self.butt5= Button(text = data["matches"][i]["recipeName"],
+                                  font_size = 10,
                                   size_hint =(.29,.1),
                                   pos_hint = {'x':.5, 'y':.01})
-                self.add_widget(self.butt)
+                self.add_widget(self.butt5)
                 self.add_widget(img5)
-            
-        print("Done")
-            #print(data["matches"][i]["recipeName"])
-            #print(data["matches"][i]["smallImageUrls"])
-            #print("  ")
-        
+                #self.butt5.bind(on_press = justC(passId))
+
+    def justC(passId):
+        finalUrl = "http://api.yummly.com/v1/api/recipe/" + passId + "?_app_id=fabbe897&_app_key=8b6f178c57d40dee7d88629b32e01c23&"
+        rec= requests.get(finalUrl)
+        b = rec.json()
+        url = b["attribution"]["html"]
+        m = re.findall('<a href="?\'?([^"\'>]*)', url)
+        m = m[2:-2]
+        webbrowser.open(m)
+                    
+                         
 class SecondpageApp(App):
     def build (self) :
         Layout = secondpage()
         Layout.build()
         return Layout
+
 
 
         
