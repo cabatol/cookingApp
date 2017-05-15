@@ -5,6 +5,7 @@ CST205-Team048-Proj3
 Cooking App
 
 Chino Abatol, Harsimrit Bhatia, Judith Ramirez
+
 TA:Michael Sanchez
 May 13, 2017
 
