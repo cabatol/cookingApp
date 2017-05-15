@@ -490,6 +490,40 @@ class LearnToCook(App):
         url2 = "https://www.youtube.com/watch?v="
         url = url2 + url1
         webbrowser.open(url) # Opens a webbrowser to the desired video
+  
+#   General layout of the More page that will show the recipes that the user has
+#   previously saved.
+        
+class interestingContent(App):
+    def build(self):
+        
+        # Defines the widgets on the screen
+        
+        f = FloatLayout()
+        
+        # Created the back button
+
+        btn1 = Button(text = "Back", size_hint = (.05, .05), pos_hint = {'x':.008, 'y':.94})
+        btn1.bind(on_press=self.goBack) # Binding of the back button
+        
+        # Created the label for the page
+        
+        f.add_widget(Label(text = "More",
+                           font_size = 45,
+                           size_hint=(1,1.9)))
+                           
+        # Places the widgets into the screen
+        
+        f.add_widget(btn1)
+        
+        
+        return f
+
+    # Defines the action of the back button
+    
+    def goBack(self, obj):
+        more.stop()
+        app.run()
 
 
 # Initializes the entire app and starts the page
