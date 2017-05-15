@@ -27,6 +27,7 @@ from oauth2client.tools import argparser # Denedencies of the Youtube API
 import random # Random functions for python
 import webbrowser # Functions to open a web browser
 from kivy.uix.video import Video # Functions to be able to work with videos in Kivy
+import re
 
 # Defining variables that will be used by the Youtube API
 
@@ -266,27 +267,19 @@ class secondpage(FloatLayout):
                                   pos_hint = {'x':.5, 'y':.01})
                 self.add_widget(self.butt5)
                 self.add_widget(img5)
-                #self.butt5.bind(on_press = justC(passId))
+                #self.butt5.bind(on_press = justC(ids))
 
     # Function to get reicpe that user chooses from selection on the page
     
-    def justC(passId):
-        finalUrl = "http://api.yummly.com/v1/api/recipe/" + passId + "?_app_id=fabbe897&_app_key=8b6f178c57d40dee7d88629b32e01c23&"
-        rec= requests.get(finalUrl)
-        b = rec.json()
-        url = b["attribution"]["html"]
-        m = re.findall('<a href="?\'?([^"\'>]*)', url)
-        m = m[2:-2]
-        webbrowser.open(m)
+            def justC(passId):
+                finalUrl = "http://api.yummly.com/v1/api/recipe/" + passId + "?_app_id=fabbe897&_app_key=8b6f178c57d40dee7d88629b32e01c23&"
+                rec= requests.get(finalUrl)
+                b = rec.json()
+                url = b["attribution"]["html"]
+                m = str(re.findall('<a href="?\'?([^"\'>]*)', url))
+                m = m[2:-2]
+                webbrowser.open(m)
                     
-# Initializing the second page
-
-class SecondpageApp(App):
-    def build (self) :
-        Layout = secondpage()
-        Layout.build()
-        return Layout
-
 # Defining the page to be able to add a recipe
 
 class SecondpageApp(App):
